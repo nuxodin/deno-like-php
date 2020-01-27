@@ -1,4 +1,4 @@
-import {Request as NuxRequest} from "file:D://workspace/github/nux_app/request.js";
+import {Request as NuxRequest} from "https://raw.githubusercontent.com/nuxodin/nux_app/master/request.js";
 
 export default class likePHP {
     constructor(options){
