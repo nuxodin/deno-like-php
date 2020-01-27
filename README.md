@@ -1,6 +1,3 @@
-# deno-like-php
-familiar environment for php people (for fun)
-
 # ussage
 
 ## main.js
