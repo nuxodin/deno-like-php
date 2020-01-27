@@ -8,7 +8,7 @@ export default class likePHP {
         return new Promise((resolve, reject) => {
             var req = new NuxRequest(denoRequest);
             //await req.initSession();
-            const worker = new Worker('./phplike_worker.js', {type:'module'});
+            const worker = new Worker(import.meta.url + '/../worker.js', {type:'module'});
             worker.postMessage({
                 documentRoot:this.documentRoot,
                 request:req,
