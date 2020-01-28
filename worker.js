@@ -23,6 +23,27 @@ global.header = function(str){
     headers.push(str.split(/:/));
 }
 
+global.sleep = function(seconds){
+    return new Promise(resolve => setTimeout(resolve, seconds/1000));
+}
+
+/*
+global.include = async function(path){
+    lastReturn = null;
+    try {
+        await import(path);
+    } catch(e) {
+        console.log(e);
+    }
+    return lastReturn;
+}
+var lastReturn = null;
+global.return = function(x){
+    lastReturn = x;
+    throw '';
+}
+*/
+
 onmessage = async function(e){
     let path = (e.data.documentRoot + e.data.request.url).replace(/\?.*/, '');
 
