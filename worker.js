@@ -37,12 +37,13 @@ onmessage = async function(e){
     $_SERVER['REQUEST_URI']     = data.request.url;
     $_SERVER['REMOTE_ADDR']     = data.request.conn.remoteAddr.hostname;
 
+    var unique = Math.random() // todo timestamp
     try {
-        await import(path);
+        await import(path+'?'+unique);
     } catch {
         try {
             console.log('not found'+path+' '+e.message);
-            await import(path+'/index.js');
+            await import(path+'/index.js?'+unique);
         } catch(e) {
             console.log('not found'+path+' '+e.message);
         }
