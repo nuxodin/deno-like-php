@@ -1,5 +1,14 @@
 import {Request as NuxRequest} from "https://raw.githubusercontent.com/nuxodin/nux_app/master/request.js";
 
+/**
+ * Create a instance
+ * @param src the file/directory path.
+ *            Note that if `src` is a directory it will copy everything inside
+ *            of this directory, not the entire directory itself
+ * @param dest the destination path. Note that if `src` is a file, `dest` cannot
+ *             be a directory
+ * @param options
+ */
 export default class likePHP {
     constructor(options){
         this.documentRoot = options.documentRoot;
