@@ -2,7 +2,7 @@
 
 ## main.js
 ```js
-import {serve} from "https://deno.land/std/http/server.ts";
+import {serve} from "https://deno.land/std@v0.42.0/http/server.ts";
 import likePHP from "https://raw.githack.com/nuxodin/deno-like-php/master/php.js";
 
 const phplike = new likePHP({

@@ -1,6 +1,5 @@
 var global = globalThis;
 
-
 global.time = function(){
     return Math.round(Date.now()/1000);
 }
@@ -44,34 +43,30 @@ global.return = function(x){
 }
 */
 
-onmessage = async function(e){
-    let path = (e.data.documentRoot + e.data.request.url).replace(/\?.*/, '');
+
+onmessage = (e)=>{
 
     const data = e.data;
-    global.$_GET = data.request.__get;
-    global.$_COOKIE = data.request.cookie;
+    const ctx  = data.context;
+    global.$_GET    = ctx.in.__get;
+    global.$_COOKIE = ctx.cookies;
 
     $_SERVER['DOCUMENT_ROOT']   = data.documentRoot;
-    $_SERVER['HTTP_REFERER']    = data.request.header['referer'];
-    $_SERVER['HTTP_USER_AGENT'] = data.request.header['user-agent'];
-    $_SERVER['HTTP_HOST']       = data.request.header.host;
-    $_SERVER['REQUEST_URI']     = data.request.url;
-    $_SERVER['REMOTE_ADDR']     = data.request.conn.remoteAddr.hostname;
+    $_SERVER['HTTP_REFERER']    = ctx.in.headers['referer'];
+    $_SERVER['HTTP_USER_AGENT'] = ctx.in.headers['user-agent'];
+    $_SERVER['HTTP_HOST']       = ctx.in.headers['host'];
+    $_SERVER['REQUEST_URI']     = ctx.in.url;
+    //$_SERVER['REMOTE_ADDR']     = data.request.conn.remoteAddr.hostname;
 
-    var unique = Math.random() // todo timestamp
-    try {
-        await import(path+'?'+unique);
-    } catch {
-        try {
-            console.log('not found'+path+' '+e.message);
-            await import(path+'/index.js?'+unique);
-        } catch(e) {
-            console.log('not found'+path+' '+e.message);
-        }
-    }
-    this.postMessage({
-        body:output,
-        headers:headers,
+    // this does not work at the moment!!!!!!!!!!!
+    console.log($_SERVER)
+    import(e.data.path+'?'+e.data.modified).then(()=>{
+        /*
+        this.postMessage({
+            body:output,
+            headers:headers,
+        });
+        */
     });
 
 }
