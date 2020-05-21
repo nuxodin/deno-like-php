@@ -1,4 +1,4 @@
-import {getContext} from "https://raw.githubusercontent.com/nuxodin/nux/master/request/context.js";
+import {getContext} from "https://raw.githubusercontent.com/nuxodin/nux/master/context/context.js";
 import {stat} from "https://raw.githubusercontent.com/nuxodin/nux/master/util/nuxo.js";
 
 export default class likePHP {
@@ -9,12 +9,12 @@ export default class likePHP {
         return new Promise(async (resolve, reject) => {
             const ctx = getContext(denoRequest);
 
-            let path = (this.documentRoot + ctx.in.url.pathname).replace(/\?.*/, ''); // todo:security
-            console.log(path)
-            path = path.replace(/^file:\/\/\//,'');
+            let pathUrl = (this.documentRoot + ctx.in.url.pathname).replace(/\?.*/, ''); // todo:security
+            let path = pathUrl.replace(/^file:\/\/\//,'');
             let fileInfo = await stat(path);
-            if (!fileInfo) {
+            if (fileInfo && fileInfo.isDirectory) {
                 path = path+'/index.js';
+                pathUrl = pathUrl+'/index.js'; // todo:security
                 fileInfo = await stat(path);
             }
             if (!fileInfo) {
@@ -39,18 +39,17 @@ export default class likePHP {
 
             worker.postMessage({
                 documentRoot:this.documentRoot,
-                path: path,
-                modified: fileInfo.modified,
+                path: pathUrl,
+                modified: fileInfo.mtime,
                 context,
             });
             worker.onmessage = function(e) {
-                /*
-                e.data.headers.forEach(function(header){
-                    ctx.header[header[0]] = header[1];
+                e.data.headers.forEach(function([name, value]){
+                    ctx.out.headers.set(name, value)
                 });
-                ctx.respond(e.data);
-                */
+                ctx.out.body = e.data.body;
                 resolve();
+                denoRequest.respond(ctx.out)
                 worker.terminate();
             }
         })

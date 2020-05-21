@@ -23,7 +23,7 @@ global.header = function(str){
 }
 
 global.sleep = function(seconds){
-    return new Promise(resolve => setTimeout(resolve, seconds/1000));
+    return new Promise(resolve => setTimeout(resolve, seconds*1000));
 }
 
 /*
@@ -56,17 +56,15 @@ onmessage = (e)=>{
     $_SERVER['HTTP_USER_AGENT'] = ctx.in.headers['user-agent'];
     $_SERVER['HTTP_HOST']       = ctx.in.headers['host'];
     $_SERVER['REQUEST_URI']     = ctx.in.url;
-    //$_SERVER['REMOTE_ADDR']     = data.request.conn.remoteAddr.hostname;
+    $_SERVER['REMOTE_ADDR']     = ctx.in.ip;
 
-    // this does not work at the moment!!!!!!!!!!!
-    console.log($_SERVER)
-    import(e.data.path+'?'+e.data.modified).then(()=>{
-        /*
-        this.postMessage({
+    // import is finised before inside top level awaits are executed :(
+    import(e.data.path+'?'+e.data.modified).then( async (e)=>{
+        console.log(e)
+        globalThis.postMessage({
             body:output,
             headers:headers,
         });
-        */
     });
 
 }

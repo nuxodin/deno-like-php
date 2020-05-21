@@ -14,12 +14,8 @@ for (var i in $_SERVER) {
 }
 echo `</ul>`;
 
-
 echo `es sollte noch mehr kommen: `;
-/*
-var x = await sleep(1); // not working, deno bug?
+
+await sleep(1); // not working, deno bug?
+
 echo `<b>top!</b>`;
-
-
-console.log(2223);
-*/
