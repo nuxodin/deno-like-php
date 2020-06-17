@@ -24,7 +24,7 @@ export default class likePHP {
                 return;
             }
 
-            const workerPath = import.meta.url + '/../worker.js';
+            const workerPath = new URL("worker.js", import.meta.url).href;
             const worker = new Worker(workerPath, {type:'module', deno:false});
 
             worker.addEventListener('error', function(e){
