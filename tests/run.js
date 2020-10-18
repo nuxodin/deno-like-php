@@ -1,4 +1,4 @@
-import {serve} from "https://deno.land/std@0.50.0/http/server.ts";
+import {serve} from "https://deno.land/std@0.74.0/http/server.ts";
 import likePHP from "../php.js";
 
 let phplike = new likePHP({
