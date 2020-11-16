@@ -19,7 +19,6 @@ export default class likePHP {
             }
             if (!fileInfo) {
                 denoRequest.respond({body:'not found'});
-                //ctx.respond({body:'not found'});
                 resolve();
                 return;
             }

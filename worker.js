@@ -58,7 +58,6 @@ onmessage = (e)=>{
     $_SERVER['REQUEST_URI']     = ctx.in.url;
     $_SERVER['REMOTE_ADDR']     = ctx.in.ip;
 
-    // import is finised before inside top level awaits are executed :(
     import(e.data.path+'?'+e.data.modified).then( async (e)=>{
         globalThis.postMessage({
             body:output,

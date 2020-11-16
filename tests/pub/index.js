@@ -14,8 +14,8 @@ for (var i in $_SERVER) {
 }
 echo `</ul>`;
 
-echo `es sollte noch mehr kommen: `;
+echo `wait .1 seconds `;
 
-await sleep(.1); // not working, deno bug?
+await sleep(.1);
 
 echo `<b>top!</b>`;
