@@ -4,7 +4,7 @@ waiting https://github.com/denoland/deno/issues/5215 to be fixed / clarified
 
 ## main.js
 ```js
-import {serve} from "https://deno.land/std@0.74.0/http/server.ts";
+import {serve} from "https://deno.land/std@0.75.0/http/server.ts";
 import likePHP from "https://raw.githack.com/nuxodin/deno-like-php/master/php.js";
 
 const phplike = new likePHP({

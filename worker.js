@@ -60,7 +60,6 @@ onmessage = (e)=>{
 
     // import is finised before inside top level awaits are executed :(
     import(e.data.path+'?'+e.data.modified).then( async (e)=>{
-        console.log(e)
         globalThis.postMessage({
             body:output,
             headers:headers,

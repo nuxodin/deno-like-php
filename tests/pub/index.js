@@ -1,6 +1,6 @@
 echo `Hallo: ${$_SERVER['HTTP_HOST']} jawohl ${time()}`;
 
-//await import('./head.js');
+// await import('./head.js');
 
 echo `<ul>`;
 for (var i in $_GET) {
@@ -16,6 +16,6 @@ echo `</ul>`;
 
 echo `es sollte noch mehr kommen: `;
 
-await sleep(1); // not working, deno bug?
+await sleep(.1); // not working, deno bug?
 
 echo `<b>top!</b>`;
