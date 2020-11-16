@@ -1,4 +1,4 @@
-# ussage
+# Ussage
 
 ## main.js
 ```js
